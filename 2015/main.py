@@ -12,8 +12,8 @@ def day01():
             floor += dic[letter]
             if not len(res) and floor == -1:
                 res.append(index + 1)
-        res.insert(0, floor)
-    return res
+        res.append(floor)
+    return res[1], res[0]
 
 
 def day02():
@@ -35,7 +35,7 @@ def day02():
             circ = 2 * sum(smallest)
             volume = length * width * height
             ribbon += circ + volume
-        return [paper, ribbon]
+        return paper, ribbon
 
 
 def main():
