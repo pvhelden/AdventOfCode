@@ -1,3 +1,4 @@
+import hashlib
 import re
 from math import prod
 
@@ -70,6 +71,19 @@ def day03():
     return len(dic_part_1.values()), len(dic_part_2.values())
 
 
+def day04():
+    with open('data/day04.txt') as file:
+        key: str = file.readline().strip('\n')
+        number = 1
+        hex_hash = hashlib.md5(f'{key}{number}'.encode())
+        with tqdm() as pbar:
+            while not hex_hash.hexdigest().startswith('0' * 5):
+                number += 1
+                hex_hash = hashlib.md5(f'{key}{number}'.encode())
+                pbar.update()
+            return number
+
+
 def main():
     print("Day 1:")
     print(day01())
@@ -77,6 +91,8 @@ def main():
     print(day02())
     print("Day 3:")
     print(day03())
+    print("Day 4:")
+    print(day04())
 
 
 if __name__ == '__main__':
