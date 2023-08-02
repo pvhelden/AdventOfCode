@@ -1,6 +1,6 @@
 from hashlib import md5
 from math import prod
-from re import finditer
+from re import finditer, findall
 from time import sleep
 
 from tqdm import tqdm
@@ -82,6 +82,27 @@ def day04(key: str):
         return res[0], res[1]
 
 
+def day05(strings: list[str]):
+    res = [0, 0]
+    for string in tqdm(strings):
+        if any(substring in string for substring in ['ab', 'cd', 'pq', 'xy']):
+            continue
+
+        if len(findall(r'[aeiou]', string)) < 3:
+            continue
+
+        found = False
+        for index in range(len(string) - 1):
+            if string[index] == string[index + 1]:
+                found = True
+                break
+        if not found:
+            continue
+
+        res[0] += 1
+    return res[0], res[1]
+
+
 def main():
     print("Day 1:")
     with open('data/day01.txt') as file:
@@ -101,6 +122,11 @@ def main():
     print("Day 4:")
     with open('data/day04.txt') as file:
         print(day04(file.readline().strip('\n')))
+
+    sleep(1)
+    print("Day 5:")
+    with open('data/day05.txt') as file:
+        print(day05(file.readlines()))
 
 
 if __name__ == '__main__':

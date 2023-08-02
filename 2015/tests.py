@@ -1,6 +1,6 @@
 import unittest
 
-from main import day01, day02, day03, day04
+from main import day01, day02, day03, day04, day05
 
 
 class TestAdvent(unittest.TestCase):
@@ -44,6 +44,14 @@ class TestAdvent(unittest.TestCase):
         # Part 1
         self.assertEqual(609043, day04('abcdef')[0])
         self.assertEqual(1048970, day04('pqrstuv')[0])
+
+    def test_day05(self):
+        # Part 1
+        self.assertEqual(1, day05(['ugknbfddgicrmopn'])[0])
+        self.assertEqual(1, day05(['aaa'])[0])
+        self.assertEqual(0, day05(['jchzalrnumimnmhp'])[0])
+        self.assertEqual(0, day05(['haegwjzuvuyypxyu'])[0])
+        self.assertEqual(0, day05(['dvszwmarrgswjxmb'])[0])
 
 
 if __name__ == '__main__':
