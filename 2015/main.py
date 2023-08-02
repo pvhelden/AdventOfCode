@@ -1,6 +1,8 @@
 import re
 from math import prod
 
+from tqdm import tqdm
+
 from utils import sum_tuples
 
 
@@ -10,7 +12,7 @@ def day01():
         text = file.read().strip('\n')
         floor = 0
         dic = {'(': 1, ')': -1}
-        for index, letter in enumerate(text):
+        for index, letter in tqdm(enumerate(text)):
             floor += dic[letter]
             if not len(res) and floor == -1:
                 res.append(index + 1)
@@ -22,7 +24,7 @@ def day02():
     paper = 0
     ribbon = 0
     with open('data/day02.txt') as file:
-        for box in file.readlines():
+        for box in tqdm(file.readlines()):
             box = box.strip('\n')
             sep1, sep2 = [m.start() for m in re.finditer('x', box)]
             length = int(box[:sep1])
@@ -48,7 +50,7 @@ def day03():
         char_dic: dict[str, (int, int)] = {'^': (1, 0), '>': (0, 1), '<': (0, -1), 'v': (-1, 0)}
         dic_part_1: dict[(int, int), int] = {(0, 0): 1}
         dic_part_2: dict[(int, int), int] = {(0, 0): 1}
-        for index, char in enumerate(text):
+        for index, char in tqdm(enumerate(text)):
             move = char_dic[char]
 
             # Part 1
@@ -69,9 +71,12 @@ def day03():
 
 
 def main():
-    print("Day 1:", day01())
-    print("Day 2:", day02())
-    print("Day 3:", day03())
+    print("Day 1:")
+    print(day01())
+    print("Day 2:")
+    print(day02())
+    print("Day 3:")
+    print(day03())
 
 
 if __name__ == '__main__':
