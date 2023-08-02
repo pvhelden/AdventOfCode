@@ -1,6 +1,6 @@
-import hashlib
-import re
+from hashlib import md5
 from math import prod
+from re import finditer
 
 from tqdm import tqdm
 
@@ -27,7 +27,7 @@ def day02():
     with open('data/day02.txt') as file:
         for box in tqdm(file.readlines()):
             box = box.strip('\n')
-            sep1, sep2 = [m.start() for m in re.finditer('x', box)]
+            sep1, sep2 = [m.start() for m in finditer('x', box)]
             length = int(box[:sep1])
             width = int(box[sep1 + 1:sep2])
             height = int(box[sep2 + 1:])  # Don't include newline char
@@ -75,11 +75,11 @@ def day04():
     with open('data/day04.txt') as file:
         key: str = file.readline().strip('\n')
         number = 1
-        hex_hash = hashlib.md5(f'{key}{number}'.encode())
+        hex_hash = md5(f'{key}{number}'.encode())
         with tqdm() as pbar:
             while not hex_hash.hexdigest().startswith('0' * 5):
                 number += 1
-                hex_hash = hashlib.md5(f'{key}{number}'.encode())
+                hex_hash = md5(f'{key}{number}'.encode())
                 pbar.update()
             return number
 
