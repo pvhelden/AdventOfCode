@@ -53,6 +53,14 @@ class TestAdvent(unittest.TestCase):
         self.assertEqual(0, day05(['haegwjzuvuyypxyu'])[0])
         self.assertEqual(0, day05(['dvszwmarrgswjxmb'])[0])
 
+        # Part 2
+        self.assertEqual(1, day05(['qjhvhtzxzqqjkmpb'])[1])
+        self.assertEqual(1, day05(['xxyxx'])[1])
+        self.assertEqual(1, day05(['sknufchjdvccccta'])[1])
+        self.assertEqual(0, day05(['sknucbcfchjdvcdcta'])[1])
+        self.assertEqual(0, day05(['uurcxstgmygtbstg'])[1])
+        self.assertEqual(0, day05(['ieodomkazucvgmuy'])[1])
+
 
 if __name__ == '__main__':
     unittest.main()

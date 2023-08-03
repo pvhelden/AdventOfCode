@@ -10,14 +10,14 @@ from utils import sum_tuples
 
 def day01(text: str):
     res = [0, 0]
-    floor = 0
+    floor_nr = 0
     dic = {'(': 1, ')': -1}
     for index, letter in tqdm(enumerate(text)):
-        floor += dic[letter]
-        if not res[1] and floor == -1:
+        floor_nr += dic[letter]
+        if not res[1] and floor_nr == -1:
             res[1] = index + 1
-    res[0] = floor
-    return res[0], res[1]
+    res[0] = floor_nr
+    return tuple(res)
 
 
 def day02(boxes: list[str]):
@@ -56,7 +56,7 @@ def day03(text: str):
         dic_part_1[pos_part_1] += 1
 
         # Part 2
-        if index % 2 == 0:
+        if not index % 2:
             pos_part_2 = sum_tuples(move, pos_santa)
             pos_santa = pos_part_2
         else:
@@ -79,28 +79,31 @@ def day04(key: str):
             if not res[1] and hex_hash.hexdigest().startswith('0' * 6):
                 res[1] = number
             pbar.update()
-        return res[0], res[1]
+        return tuple(res)
 
 
 def day05(strings: list[str]):
     res = [0, 0]
     for string in tqdm(strings):
-        if any(substring in string for substring in ['ab', 'cd', 'pq', 'xy']):
-            continue
+        conditions = [[False, False, True], [False, False]]
 
-        if len(findall(r'[aeiou]', string)) < 3:
-            continue
+        # Part 1
+        conditions[0][0] = len(findall(r'[aeiou]', string)) >= 3
+        conditions[0][1] = any([i + j for i, j in zip(string, string[1:]) if i == j])
+        conditions[0][2] = not any(substring in string for substring in ['ab', 'cd', 'pq', 'xy'])
 
-        found = False
-        for index in range(len(string) - 1):
-            if string[index] == string[index + 1]:
-                found = True
-                break
-        if not found:
-            continue
+        # Part 2
+        valid_triples = [i + j + k for i, j, k in zip(string, string[1:], string[2:]) if i == k]
+        if len(valid_triples) != len({*valid_triples}):
+            conditions[1][0] = True
+        else:
+            valid_pairs = [i + j for i, j, k in zip(string, string[1:], string[2:] + '0') if not i == j == k]
+            conditions[1][0] = len(valid_pairs) != len({*valid_pairs})
+        conditions[1][1] = any(valid_triples)
 
-        res[0] += 1
-    return res[0], res[1]
+        res[0] += all(conditions[0])
+        res[1] += all(conditions[1])
+    return tuple(res)
 
 
 def main():
@@ -126,7 +129,7 @@ def main():
     sleep(1)
     print("Day 5:")
     with open('data/day05.txt') as file:
-        print(day05(file.readlines()))
+        print(day05(file.read().splitlines()))
 
 
 if __name__ == '__main__':
