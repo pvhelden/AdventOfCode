@@ -85,11 +85,11 @@ def day04(key: str):
 def day05(strings: list[str]):
     res = [0, 0]
     for string in tqdm(strings):
-        conditions = [[False, False, True], [False, False]]
+        conditions = [[False, False, False], [False, False]]
 
         # Part 1
         conditions[0][0] = len(findall(r'[aeiou]', string)) >= 3
-        conditions[0][1] = any([i + j for i, j in zip(string, string[1:]) if i == j])
+        conditions[0][1] = any([i == j for i, j in zip(string, string[1:])])
         conditions[0][2] = not any(substring in string for substring in ['ab', 'cd', 'pq', 'xy'])
 
         # Part 2
