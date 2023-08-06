@@ -25,7 +25,6 @@ def day02(boxes: list[str]):
     paper = 0
     ribbon = 0
     for box in tqdm(boxes):
-        box = box.strip('\n')
         sep1, sep2 = [m.start() for m in finditer('x', box)]
         length = int(box[:sep1])
         width = int(box[sep1 + 1:sep2])
@@ -139,7 +138,7 @@ def main():
     sleep(1)
     print("Day 2:")
     with open('data/day02.txt') as file:
-        print(day02(file.readlines()))
+        print(day02(file.read().splitlines()))
 
     sleep(1)
     print("Day 3:")
@@ -149,7 +148,7 @@ def main():
     sleep(1)
     print("Day 4:")
     with open('data/day04.txt') as file:
-        print(day04(file.readline().strip('\n')))
+        print(day04(file.read().strip('\n')))
 
     sleep(1)
     print("Day 5:")
