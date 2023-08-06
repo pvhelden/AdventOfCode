@@ -108,19 +108,26 @@ def day05(strings: list[str]):
 
 
 def day06(instructions: list[str]):
-    # Part 1
     grid1 = sparse.lil_array((1000, 1000), dtype='bool')
+    grid2 = sparse.lil_array((1000, 1000), dtype='int')
     for line in tqdm(instructions):
         line = line.split(' ')
         index = 1 if line[0] == "toggle" else 2
         start, end = [[int(coord) for coord in item.split(',')] for item in line[index::2]]
+        before = grid1[start[0]:end[0] + 1, start[1]:end[1] + 1]
+
+        # Part 1
         if line[0] == "toggle":
-            before = grid1[start[0]:end[0] + 1, start[1]:end[1] + 1]
-            inplace = [[not item for item in row] for row in before.todense()]
+            inplace1 = [[not item for item in row] for row in before.todense()]
         else:
-            inplace = line[1] == "on"
-        grid1[start[0]:end[0] + 1, start[1]:end[1] + 1] = inplace
-    return grid1.count_nonzero(), 0
+            inplace1 = line[1] == "on"
+        grid1[start[0]:end[0] + 1, start[1]:end[1] + 1] = inplace1
+
+        # Part 2
+        diff = {"toggle": 2, "on": 1, "off": -1}[line[index - 1]]
+        inplace2 = [[max(0, item + diff) for item in row] for row in before.todense()]
+        grid2[start[0]:end[0] + 1, start[1]:end[1] + 1] = inplace2
+    return grid1.count_nonzero(), grid2.sum()
 
 
 def main():
