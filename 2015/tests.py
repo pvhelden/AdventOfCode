@@ -1,6 +1,6 @@
 import unittest
 
-from main import day01, day02, day03, day04, day05, day06
+from main import day01, day02, day03, day04, day05, day06, day07
 
 
 class TestAdvent(unittest.TestCase):
@@ -72,6 +72,17 @@ class TestAdvent(unittest.TestCase):
         self.assertEqual(2000000, day06(['toggle 0,0 through 999,999'])[1])
         self.assertEqual(0, day06(['turn off 499,499 through 500,500'])[1])
         self.assertEqual(10, day06(['toggle 0,0 through 0,9', 'turn off 0,0 through 0,9'])[1])
+
+    def test_day07(self):
+        # Part 1
+        self.assertEqual(72, day07(['123 -> x', '456 -> y', 'x AND y -> a'])[0])
+        self.assertEqual(507, day07(['123 -> x', '456 -> y', 'x OR y -> a'])[0])
+        self.assertEqual(492, day07(['123 -> x', 'x LSHIFT 2 -> a'])[0])
+        self.assertEqual(114, day07(['456 -> y', 'y RSHIFT 2 -> a'])[0])
+        self.assertEqual(65412, day07(['123 -> x', 'NOT x -> a'])[0])
+        self.assertEqual(123, day07(['123 -> x', 'x -> a'])[0])
+        self.assertEqual(123, day07(['x -> a', '123 -> x'])[0])
+        self.assertEqual(1, day07(['123 -> x', '1 AND x -> a'])[0])
 
 
 if __name__ == '__main__':

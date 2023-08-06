@@ -3,6 +3,7 @@ from math import prod
 from re import finditer, findall
 from time import sleep
 
+from numpy import uint16
 from scipy import sparse
 from tqdm import tqdm
 
@@ -130,35 +131,86 @@ def day06(instructions: list[str]):
     return grid1.count_nonzero(), grid2.sum()
 
 
+def day07(instructions: list[str]):
+    signals: dict[(str, int)] = dict()
+    with tqdm() as pbar:
+        while len(instructions):
+            line = instructions.pop(0)
+            signal, wire = line.split(' -> ')
+            signal = signal.split(' ')
+
+            # Check if eventual input wires already have a value assigned. If not, do this line later.
+            end = False
+            for item in signal:
+                if not item.isdigit() and not item.isupper() and item not in signals:
+                    end = True
+            if end:
+                instructions.append(line)
+                pbar.update()
+                continue
+
+            # If eventual input wires already have a value assigned.
+            if len(signal) == 1:
+                res = signals[signal[0]] if not signal[0].isdigit() else uint16(signal[0])
+            elif len(signal) == 2:  # NOT
+                res = ~uint16(signals[signal[1]])
+            else:  # len(signal) == 3
+                left, oper, right = signal
+                left = signals[left] if not left.isdigit() else int(left)
+                right = signals[right] if not right.isdigit() else uint16(right)
+                if oper == 'AND':
+                    res = left & right
+                elif oper == 'OR':
+                    res = left | right
+                elif oper == 'LSHIFT':
+                    res = left << right
+                elif oper == 'RSHIFT':
+                    res = left >> right
+            signals[wire] = res
+            pbar.update()
+    return signals['a'], 0
+
+
 def main():
     print("Day 1:")
     with open('data/day01.txt') as file:
         print(day01(file.read().strip('\n')))
 
     sleep(1)
+    print()
     print("Day 2:")
     with open('data/day02.txt') as file:
         print(day02(file.read().splitlines()))
 
     sleep(1)
+    print()
     print("Day 3:")
     with open('data/day03.txt') as file:
         print(day03(file.read().strip('\n')))
 
     sleep(1)
+    print()
     print("Day 4:")
     with open('data/day04.txt') as file:
         print(day04(file.read().strip('\n')))
 
     sleep(1)
+    print()
     print("Day 5:")
     with open('data/day05.txt') as file:
         print(day05(file.read().splitlines()))
 
     sleep(1)
+    print()
     print("Day 6:")
     with open('data/day06.txt') as file:
         print(day06(file.read().splitlines()))
+
+    sleep(1)
+    print()
+    print("Day 7:")
+    with open('data/day07.txt') as file:
+        print(day07(file.read().splitlines()))
 
 
 if __name__ == '__main__':
