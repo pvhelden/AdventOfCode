@@ -114,18 +114,19 @@ def day06(instructions: list[str]):
         line = line.split(' ')
         index = 1 if line[0] == "toggle" else 2
         start, end = [[int(coord) for coord in item.split(',')] for item in line[index::2]]
-        before = grid1[start[0]:end[0] + 1, start[1]:end[1] + 1]
 
         # Part 1
         if line[0] == "toggle":
-            inplace1 = [[not item for item in row] for row in before.todense()]
+            before1 = grid1[start[0]:end[0] + 1, start[1]:end[1] + 1]
+            inplace1 = [[not item for item in row] for row in before1.todense()]
         else:
             inplace1 = line[1] == "on"
         grid1[start[0]:end[0] + 1, start[1]:end[1] + 1] = inplace1
 
         # Part 2
         diff = {"toggle": 2, "on": 1, "off": -1}[line[index - 1]]
-        inplace2 = [[max(0, item + diff) for item in row] for row in before.todense()]
+        before2 = grid2[start[0]:end[0] + 1, start[1]:end[1] + 1]
+        inplace2 = [[max(0, item + diff) for item in row] for row in before2.todense()]
         grid2[start[0]:end[0] + 1, start[1]:end[1] + 1] = inplace2
     return grid1.count_nonzero(), grid2.sum()
 

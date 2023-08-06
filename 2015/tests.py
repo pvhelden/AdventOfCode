@@ -71,6 +71,7 @@ class TestAdvent(unittest.TestCase):
         self.assertEqual(1, day06(['turn on 0,0 through 0,0'])[1])
         self.assertEqual(2000000, day06(['toggle 0,0 through 999,999'])[1])
         self.assertEqual(0, day06(['turn off 499,499 through 500,500'])[1])
+        self.assertEqual(10, day06(['toggle 0,0 through 0,9', 'turn off 0,0 through 0,9'])[1])
 
 
 if __name__ == '__main__':
