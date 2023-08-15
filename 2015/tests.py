@@ -91,6 +91,12 @@ class TestAdvent(unittest.TestCase):
         self.assertEqual(10 - 7, day08([r'"aaa\"aaa"'])[0])
         self.assertEqual(6 - 1, day08([r'"\x27"'])[0])
 
+        # Part 2
+        self.assertEqual(6 - 2, day08([r'""'])[1])
+        self.assertEqual(9 - 5, day08([r'"abc"'])[1])
+        self.assertEqual(16 - 10, day08([r'"aaa\"aaa"'])[1])
+        self.assertEqual(11 - 6, day08([r'"\x27"'])[1])
+
 
 if __name__ == '__main__':
     unittest.main()

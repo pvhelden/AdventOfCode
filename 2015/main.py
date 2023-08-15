@@ -178,14 +178,20 @@ def day07(instructions: list[str]):
 def day08(strings: list[str]):
     code = 0
     memory = 0
+    encoded = 0
     for string in tqdm(strings):
         code += len(string)
+
+        # Part 1
         length = len(string) - 2
         matches = re.findall(r'\\(?:x\w{2}|\\|\")', string)
         for match in matches:
             length -= len(match) - 1
         memory += length
-    return code - memory, None
+
+        # Part 2
+        encoded += len(re.sub(r'[\\\"]', '\\\0', string)) + 2
+    return code - memory, encoded - code
 
 
 def main():
