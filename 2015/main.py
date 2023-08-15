@@ -4,7 +4,6 @@ from re import finditer, findall
 from time import sleep
 
 from numpy import uint16
-from scipy import sparse
 from tqdm import tqdm
 
 from utils import sum_tuples
@@ -108,27 +107,22 @@ def day05(strings: list[str]):
 
 
 def day06(instructions: list[str]):
-    grid1 = sparse.lil_array((1000, 1000), dtype='bool')
-    grid2 = sparse.lil_array((1000, 1000), dtype='int')
+    grid1 = [[False] * 1000 for _ in range(1000)]
+    grid2 = [[0] * 1000 for _ in range(1000)]
+    increments = {'toggle': 2, 'on': 1, 'off': -1}
     for line in tqdm(instructions):
         line = line.split(' ')
-        index = 1 if line[0] == "toggle" else 2
+        index = 1 if line[0] == 'toggle' else 2
         start, end = [[int(coord) for coord in item.split(',')] for item in line[index::2]]
 
-        # Part 1
-        if line[0] == "toggle":
-            before1 = grid1[start[0]:end[0] + 1, start[1]:end[1] + 1]
-            inplace1 = [[not item for item in row] for row in before1.todense()]
-        else:
-            inplace1 = line[1] == "on"
-        grid1[start[0]:end[0] + 1, start[1]:end[1] + 1] = inplace1
+        for row in range(start[0], end[0] + 1):
+            for col in range(start[1], end[1] + 1):
+                # Part 1
+                grid1[row][col] = not grid1[row][col] if line[index - 1] == 'toggle' else line[index - 1] == "on"
 
-        # Part 2
-        diff = {"toggle": 2, "on": 1, "off": -1}[line[index - 1]]
-        before2 = grid2[start[0]:end[0] + 1, start[1]:end[1] + 1]
-        inplace2 = [[max(0, item + diff) for item in row] for row in before2.todense()]
-        grid2[start[0]:end[0] + 1, start[1]:end[1] + 1] = inplace2
-    return grid1.count_nonzero(), grid2.sum()
+                # Part 2
+                grid2[row][col] = max(0, grid2[row][col] + increments[line[index - 1]])
+    return sum(sum(row) for row in grid1), sum(sum(row) for row in grid2)
 
 
 def apply_instructions(instructions: list[str], signals: dict[(str, int)]):
