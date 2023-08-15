@@ -1,3 +1,4 @@
+import re
 from hashlib import md5
 from math import prod
 from re import finditer, findall
@@ -174,6 +175,19 @@ def day07(instructions: list[str]):
     return signals1['a'], signals2['a']
 
 
+def day08(strings: list[str]):
+    code = 0
+    memory = 0
+    for string in tqdm(strings):
+        code += len(string)
+        length = len(string) - 2
+        matches = re.findall(r'\\(?:x\w{2}|\\|\")', string)
+        for match in matches:
+            length -= len(match) - 1
+        memory += length
+    return code - memory, None
+
+
 def main():
     print("Day 1:")
     with open('data/day01.txt') as file:
@@ -214,6 +228,12 @@ def main():
     print("Day 7:")
     with open('data/day07.txt') as file:
         print(day07(file.read().splitlines()))
+
+    sleep(1)
+    print()
+    print("Day 8:")
+    with open('data/day08.txt') as file:
+        print(day08(file.read().splitlines()))
 
 
 if __name__ == '__main__':

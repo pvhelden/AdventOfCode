@@ -1,6 +1,6 @@
 import unittest
 
-from main import day01, day02, day03, day04, day05, day06, day07
+from main import day01, day02, day03, day04, day05, day06, day07, day08
 
 
 class TestAdvent(unittest.TestCase):
@@ -83,6 +83,13 @@ class TestAdvent(unittest.TestCase):
         self.assertEqual(123, day07(['123 -> x', 'x -> a'])[0])
         self.assertEqual(123, day07(['x -> a', '123 -> x'])[0])
         self.assertEqual(1, day07(['123 -> x', '1 AND x -> a'])[0])
+
+    def test_day08(self):
+        # Part 1
+        self.assertEqual(2 - 0, day08([r'""'])[0])
+        self.assertEqual(5 - 3, day08([r'"abc"'])[0])
+        self.assertEqual(10 - 7, day08([r'"aaa\"aaa"'])[0])
+        self.assertEqual(6 - 1, day08([r'"\x27"'])[0])
 
 
 if __name__ == '__main__':
