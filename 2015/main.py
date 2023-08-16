@@ -195,7 +195,7 @@ def day08(strings: list[str]):
     return code - memory, encoded - code
 
 
-def build_distance_matrix(distance_strings):
+def build_distance_matrix(distance_strings: list[str]):
     cities = set()
     distances_dict = {}
 
@@ -223,9 +223,10 @@ def build_distance_matrix(distance_strings):
     return distances_matrix
 
 
-def day09(distance_strings):
+def day09(distance_strings: list[str]):
     distances_matrix = build_distance_matrix(distance_strings)
     min_distance = float('inf')
+    max_distance = 0
 
     for order in tqdm(permutations(range(len(distances_matrix)))):
         order: tuple[int]  # Type hint, not functional
@@ -234,7 +235,9 @@ def day09(distance_strings):
             distance += distances_matrix[city_from][city_to]
         if distance < min_distance:
             min_distance = distance
-    return min_distance, None
+        if distance > max_distance:
+            max_distance = distance
+    return min_distance, max_distance
 
 
 def main():

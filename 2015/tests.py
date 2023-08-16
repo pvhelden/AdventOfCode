@@ -103,6 +103,11 @@ class TestAdvent(unittest.TestCase):
                                      'London to Belfast = 518',
                                      'Dublin to Belfast = 141'])[0])
 
+        # Part 2
+        self.assertEqual(982, day09(['London to Dublin = 464',
+                                     'London to Belfast = 518',
+                                     'Dublin to Belfast = 141'])[1])
+
 
 if __name__ == '__main__':
     unittest.main()
