@@ -1,5 +1,6 @@
 import re
 from hashlib import md5
+from itertools import permutations
 from math import prod
 from re import finditer, findall
 from time import sleep
@@ -194,6 +195,48 @@ def day08(strings: list[str]):
     return code - memory, encoded - code
 
 
+def build_distance_matrix(distance_strings):
+    cities = set()
+    distances_dict = {}
+
+    for distance_string in tqdm(distance_strings):
+        parts = distance_string.split()
+        city_from, city_to, distance = parts[0], parts[2], int(parts[4])
+
+        cities.add(city_from)
+        cities.add(city_to)
+
+        distances_dict[(city_from, city_to)] = distance
+        distances_dict[(city_to, city_from)] = distance
+
+    cities = sorted(cities)
+    n = len(cities)
+    distances_matrix = [[0] * n for _ in range(n)]
+
+    for i, city_from in tqdm(enumerate(cities)):
+        for j, city_to in enumerate(cities):
+            if i != j:
+                distance = distances_dict.get((city_from, city_to), float('inf'))
+                distances_matrix[i][j] = distance
+                distances_matrix[j][i] = distance
+
+    return distances_matrix
+
+
+def day09(distance_strings):
+    distances_matrix = build_distance_matrix(distance_strings)
+    min_distance = float('inf')
+
+    for order in tqdm(permutations(range(len(distances_matrix)))):
+        order: tuple[int]  # Type hint, not functional
+        distance = 0
+        for city_from, city_to in zip(order, order[1:]):
+            distance += distances_matrix[city_from][city_to]
+        if distance < min_distance:
+            min_distance = distance
+    return min_distance, None
+
+
 def main():
     print("Day 1:")
     with open('data/day01.txt') as file:
@@ -240,6 +283,12 @@ def main():
     print("Day 8:")
     with open('data/day08.txt') as file:
         print(day08(file.read().splitlines()))
+
+    sleep(1)
+    print()
+    print("Day 9:")
+    with open('data/day09.txt') as file:
+        print(day09(file.read().splitlines()))
 
 
 if __name__ == '__main__':
