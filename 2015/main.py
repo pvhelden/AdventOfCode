@@ -240,8 +240,9 @@ def day09(distance_strings: list[str]):
     return min_distance, max_distance
 
 
-def day10(sequence: str, iter_n=40):
-    for _ in tqdm(range(iter_n)):
+def day10(sequence: str, iter_n=50):
+    seq1 = ''
+    for index in tqdm(range(iter_n)):
         next_seq = ''
         sub = [sequence[0]]
         for char in sequence[1:]:
@@ -252,7 +253,9 @@ def day10(sequence: str, iter_n=40):
                 sub = [char]
         next_seq += f'{len(sub)}{sub[0]}'
         sequence = next_seq
-    return len(sequence), None
+        if iter_n == 50 and index == 39:
+            seq1 = sequence
+    return len(seq1) if seq1 else len(sequence), len(sequence)
 
 
 def main():

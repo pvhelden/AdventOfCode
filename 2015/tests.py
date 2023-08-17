@@ -116,6 +116,7 @@ class TestAdvent(unittest.TestCase):
         self.assertEqual(6, day10('1211', iter_n=1)[0])
         self.assertEqual(6, day10('111221', iter_n=1)[0])
         self.assertEqual(6, day10('1', iter_n=5)[0])
+        self.assertEqual((329356, 4666278), day10('3113322113'))
 
 
 if __name__ == '__main__':
