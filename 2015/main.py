@@ -240,6 +240,21 @@ def day09(distance_strings: list[str]):
     return min_distance, max_distance
 
 
+def day10(sequence: str, iter_n=40):
+    for _ in tqdm(range(iter_n)):
+        next_seq = ''
+        sub = [sequence[0]]
+        for char in sequence[1:]:
+            if char == sub[0]:
+                sub.append(char)
+            else:
+                next_seq += f'{len(sub)}{sub[0]}'
+                sub = [char]
+        next_seq += f'{len(sub)}{sub[0]}'
+        sequence = next_seq
+    return len(sequence), None
+
+
 def main():
     print("Day 1:")
     with open('data/day01.txt') as file:
@@ -292,6 +307,12 @@ def main():
     print("Day 9:")
     with open('data/day09.txt') as file:
         print(day09(file.read().splitlines()))
+
+    sleep(1)
+    print()
+    print("Day 10:")
+    with open('data/day10.txt') as file:
+        print(day10(file.read().strip('\n')))
 
 
 if __name__ == '__main__':

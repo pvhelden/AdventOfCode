@@ -1,6 +1,6 @@
 import unittest
 
-from main import day01, day02, day03, day04, day05, day06, day07, day08, day09
+from main import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
 
 
 class TestAdvent(unittest.TestCase):
@@ -107,6 +107,15 @@ class TestAdvent(unittest.TestCase):
         self.assertEqual(982, day09(['London to Dublin = 464',
                                      'London to Belfast = 518',
                                      'Dublin to Belfast = 141'])[1])
+
+    def test_day10(self):
+        # Part 1
+        self.assertEqual(2, day10('1', iter_n=1)[0])
+        self.assertEqual(2, day10('11', iter_n=1)[0])
+        self.assertEqual(4, day10('21', iter_n=1)[0])
+        self.assertEqual(6, day10('1211', iter_n=1)[0])
+        self.assertEqual(6, day10('111221', iter_n=1)[0])
+        self.assertEqual(6, day10('1', iter_n=5)[0])
 
 
 if __name__ == '__main__':
