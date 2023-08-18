@@ -1,7 +1,7 @@
 from tqdm import tqdm
 
 
-def day06(instructions: list[str]):
+def count_lit_lights(instructions: list[str]):
     grid1 = [[False] * 1000 for _ in range(1000)]
     grid2 = [[0] * 1000 for _ in range(1000)]
     increments = {'toggle': 2, 'on': 1, 'off': -1}
@@ -22,4 +22,4 @@ def day06(instructions: list[str]):
 
 def main(filename: str):
     with open(filename) as file:
-        return day06(file.read().splitlines())
+        return count_lit_lights(file.read().splitlines())

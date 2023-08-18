@@ -4,7 +4,7 @@ from re import finditer
 from tqdm import tqdm
 
 
-def day02(boxes: list[str]):
+def get_required_lenghts(boxes: list[str]):
     paper = 0
     ribbon = 0
     for box in tqdm(boxes):
@@ -27,4 +27,4 @@ def day02(boxes: list[str]):
 
 def main(filename: str):
     with open(filename) as file:
-        return day02(file.read().splitlines())
+        return get_required_lenghts(file.read().splitlines())

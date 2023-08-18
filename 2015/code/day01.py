@@ -1,7 +1,7 @@
 from tqdm import tqdm
 
 
-def day01(text: str):
+def get_final_floor_number(text: str):
     res = [0, 0]
     floor_nr = 0
     dic = {'(': 1, ')': -1}
@@ -15,4 +15,4 @@ def day01(text: str):
 
 def main(filename: str):
     with open(filename) as file:
-        return day01(file.read().strip('\n'))
+        return get_final_floor_number(file.read().strip('\n'))

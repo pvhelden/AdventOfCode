@@ -3,7 +3,7 @@ from hashlib import md5
 from tqdm import tqdm
 
 
-def day04(key: str):
+def find_zero_padded_hex(key: str):
     res = [0, 0]
     number = 1
     with tqdm() as pbar:
@@ -20,4 +20,4 @@ def day04(key: str):
 
 def main(filename: str):
     with open(filename) as file:
-        return day04(file.read().strip('\n'))
+        return find_zero_padded_hex(file.read().strip('\n'))

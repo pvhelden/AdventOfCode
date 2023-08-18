@@ -3,7 +3,7 @@ from tqdm import tqdm
 from utils import sum_tuples
 
 
-def day03(text: str):
+def find_final_positions(text: str):
     pos_part_1, pos_robot, pos_santa = [[0, 0]] * 3
     char_dic: dict[str, (int, int)] = {'^': (1, 0), '>': (0, 1), '<': (0, -1), 'v': (-1, 0)}
     dic_part_1: dict[(int, int), int] = {(0, 0): 1}
@@ -30,4 +30,4 @@ def day03(text: str):
 
 def main(filename: str):
     with open(filename) as file:
-        return day03(file.read().strip('\n'))
+        return find_final_positions(file.read().strip('\n'))

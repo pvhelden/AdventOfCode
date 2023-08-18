@@ -43,7 +43,7 @@ def apply_instructions(instructions: list[str], signals: dict[(str, int)]):
             pbar.update()
 
 
-def day07(instructions: list[str]):
+def compute_signal_a(instructions: list[str]):
     signals1: dict[(str, int)] = dict()
     apply_instructions(instructions.copy(), signals1)
     signals2: dict[(str, int)] = {'b': signals1['a']}
@@ -53,4 +53,4 @@ def day07(instructions: list[str]):
 
 def main(filename: str):
     with open(filename) as file:
-        return day07(file.read().splitlines())
+        return compute_signal_a(file.read().splitlines())

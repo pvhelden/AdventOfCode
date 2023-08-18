@@ -31,7 +31,7 @@ def build_distance_matrix(distance_strings: list[str]):
     return distances_matrix
 
 
-def day09(distance_strings: list[str]):
+def find_extreme_paths(distance_strings: list[str]):
     distances_matrix = build_distance_matrix(distance_strings)
     min_distance = float('inf')
     max_distance = 0
@@ -50,4 +50,4 @@ def day09(distance_strings: list[str]):
 
 def main(filename: str):
     with open(filename) as file:
-        return day09(file.read().splitlines())
+        return find_extreme_paths(file.read().splitlines())
