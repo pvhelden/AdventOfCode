@@ -1,10 +1,10 @@
 from time import sleep
 
-from code import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
+from code import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10, day11
 
 
 def main():
-    modules = [day01, day02, day03, day04, day05, day06, day07, day08, day09, day10]
+    modules = [day01, day02, day03, day04, day05, day06, day07, day08, day09, day10, day11]
     days = [i + 1 for i in range(len(modules))]
     # days = [2]
 

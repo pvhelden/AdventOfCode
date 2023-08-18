@@ -130,6 +130,16 @@ class TestAdvent(unittest.TestCase):
         # Solution
         self.assertEqual((329356, 4666278), day10.main('data/day10.txt'))
 
+    def test_day11(self):
+        # Part 1
+        self.assertEqual((True, False, False), day11.check_pass([ord(char) for char in 'hijklmmn']))
+        self.assertEqual((False, True, False), day11.check_pass([ord(char) for char in 'abbcegjk']))
+        self.assertEqual((False, True, True), day11.check_pass([ord(char) for char in 'abbceffg']))
+        self.assertEqual((True, True, False), day11.check_pass([ord(char) for char in 'abcaaaaa']))
+        self.assertEqual([ord(char) for char in 'baaaaaaa'], day11.incr_pass([ord(char) for char in 'azzzzzzz']))
+        self.assertEqual('abcdffaa', day11.find_next_pass('abcdefgh'))
+        self.assertEqual('ghjaabcc', day11.find_next_pass('ghijklmn'))
+
 
 if __name__ == '__main__':
     unittest.main()
