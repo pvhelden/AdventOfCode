@@ -47,6 +47,7 @@ def incr_pass(new_pass: list[int]):
 
 def find_next_pass(old_pass: str):
     new_pass = [ord(char) for char in old_pass]
+    new_pass = incr_pass(new_pass)
     checks = check_pass(new_pass)
     with tqdm() as pbar:
         while not all(checks):
@@ -65,4 +66,6 @@ def find_next_pass(old_pass: str):
 
 def main(filename: str):
     with open(filename) as file:
-        return find_next_pass(file.read().strip('\n'))
+        second = find_next_pass(file.read().strip('\n'))
+        third = find_next_pass(second)
+        return second, third
