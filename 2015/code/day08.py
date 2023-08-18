@@ -1,4 +1,4 @@
-from re import findall, sub
+from re import findall
 
 from tqdm import tqdm
 
@@ -11,9 +11,9 @@ def find_lengths_diff(string: str):
         memory -= len(match) - 1
 
     # Part 2
-    encoded = len(sub(r'[\\\"]', '\\\0', string)) + 2
+    encoded_diff = len(findall(r'[\\\"]', string)) + 2
 
-    return len(string) - memory, encoded - len(string)
+    return len(string) - memory, encoded_diff
 
 
 def compute_sum_lenghts(strings: list[str]):
