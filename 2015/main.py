@@ -1,8 +1,7 @@
-import re
 from hashlib import md5
 from itertools import permutations
 from math import prod
-from re import finditer, findall
+from re import finditer, findall, sub
 from time import sleep
 
 from numpy import uint16
@@ -185,13 +184,13 @@ def day08(strings: list[str]):
 
         # Part 1
         length = len(string) - 2
-        matches = re.findall(r'\\(?:x\w{2}|\\|\")', string)
+        matches = findall(r'\\(?:x\w{2}|\\|\")', string)
         for match in matches:
             length -= len(match) - 1
         memory += length
 
         # Part 2
-        encoded += len(re.sub(r'[\\\"]', '\\\0', string)) + 2
+        encoded += len(sub(r'[\\\"]', '\\\0', string)) + 2
     return code - memory, encoded - code
 
 
@@ -244,14 +243,14 @@ def day10(sequence: str, iter_n=50):
     seq1 = ''
     for index in tqdm(range(iter_n)):
         next_seq = ''
-        sub = [sequence[0]]
+        sub_seq = [sequence[0]]
         for char in sequence[1:]:
-            if char == sub[0]:
-                sub.append(char)
+            if char == sub_seq[0]:
+                sub_seq.append(char)
             else:
-                next_seq += f'{len(sub)}{sub[0]}'
-                sub = [char]
-        next_seq += f'{len(sub)}{sub[0]}'
+                next_seq += f'{len(sub_seq)}{sub_seq[0]}'
+                sub_seq = [char]
+        next_seq += f'{len(sub_seq)}{sub_seq[0]}'
         sequence = next_seq
         if iter_n == 50 and index == 39:
             seq1 = sequence
