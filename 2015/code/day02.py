@@ -1,5 +1,4 @@
 from math import prod
-from re import finditer
 
 from tqdm import tqdm
 
@@ -8,10 +7,8 @@ def get_required_lenghts(boxes: list[str]):
     paper = 0
     ribbon = 0
     for box in tqdm(boxes):
-        sep1, sep2 = [m.start() for m in finditer('x', box)]
-        length = int(box[:sep1])
-        width = int(box[sep1 + 1:sep2])
-        height = int(box[sep2 + 1:])  # Don't include newline char
+        parts = box.split('x')
+        length, width, height = [int(part) for part in parts]
         smallest = sorted([length, width, height])[:2]
 
         sides = [length * width, width * height, height * length]
