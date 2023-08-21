@@ -11,7 +11,7 @@ def check_straight(password: list[int]):
 
 def check_confusing(password: list[int]):
     # Condition 2
-    return not any([char in password for char in [105, 108, 111]])  # ['i', 'l', 'o']]
+    return not any([char in password for char in [105, 108, 111]])  # [ord('i'), ord('l'), ord('o')]]
 
 
 def check_pairs(password: list[int]):
@@ -24,8 +24,10 @@ def check_pairs(password: list[int]):
             continue
         if code1 == code2:
             pairs.add(code1)
+            if len(pairs) == 2:
+                return True
             skip_next = True
-    return len(pairs) == 2
+    return False
 
 
 def check_pass(password: list[int]):
@@ -36,8 +38,8 @@ def incr_pass(new_pass: list[int]):
     done = False
     index = -1
     while not done:
-        if new_pass[index] == 122:  # 'z'
-            new_pass[index] = 97
+        if new_pass[index] == 122:  # ord('z')
+            new_pass[index] = 97  # ord('a')
             index -= 1
         else:
             new_pass[index] += 1
@@ -53,9 +55,9 @@ def find_next_pass(old_pass: str):
         while not all(checks):
             if not checks[1]:
                 for index, code in enumerate(new_pass):
-                    if code in [105, 108, 111]:  # ['i', 'l', 'o']
+                    if code in [105, 108, 111]:  # [ord('i'), ord('l'), ord('o')]]
                         new_pass[index] = code + 1
-                        new_pass[index + 1:] = [97] * (7 - index)  # ['a']
+                        new_pass[index + 1:] = [97] * (7 - index)  # ord('a')
                         break
             elif not checks[0] or not checks[2]:
                 new_pass = incr_pass(new_pass)
