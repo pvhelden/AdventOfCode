@@ -3,7 +3,7 @@ from itertools import permutations
 from tqdm import tqdm
 
 
-def parse_happiness_data(lines: list[str]):
+def parse_happiness_data(lines: list[str], add_neutral: bool = False):
     relations: dict[int, dict[int, int]] = dict()
     persons: dict[str, int] = dict()
 
@@ -19,6 +19,13 @@ def parse_happiness_data(lines: list[str]):
         happiness = int(parts[3]) * (-1 if parts[2] == 'lose' else 1)
         relations[persons[person1]][persons[person2]] = happiness
 
+    if add_neutral:
+        new = len(relations)
+        relations.setdefault(new, dict())
+        for person in relations:
+            relations[person][new] = 0
+            relations[new][person] = 0
+
     return relations
 
 
@@ -26,8 +33,8 @@ def get_max_remaining(persons: list[int], highests: list[int]):
     return sum([highests[person] for person in persons])
 
 
-def find_max_happiness(input_list: list[str]):
-    relations = parse_happiness_data(input_list)
+def find_max_happiness(input_list: list[str], add_neutral: bool = False):
+    relations = parse_happiness_data(input_list, add_neutral)
     highests = [sum(sorted(relations[person].values())[-2:]) for person in sorted(relations)]
     max_happiness = 0
     with tqdm() as pbar:
@@ -55,4 +62,4 @@ def find_max_happiness(input_list: list[str]):
 def main(filename: str):
     with open(filename) as file:
         lines = file.read().splitlines()
-        return find_max_happiness(lines), None
+        return find_max_happiness(lines), find_max_happiness(lines, add_neutral=True)

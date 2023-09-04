@@ -180,6 +180,15 @@ class TestAdvent(unittest.TestCase):
             "David would gain 41 happiness units by sitting next to Carol."
         ]))
 
+        # Part 2
+        self.assertEqual(3, len(day13.parse_happiness_data([
+            "Alice would gain 54 happiness units by sitting next to Bob.",
+            "Bob would gain 83 happiness units by sitting next to Alice.",
+        ], True)))
+
+        # Solution
+        self.assertEqual((664, 640), day13.main('data/day13.txt'))
+
 
 if __name__ == '__main__':
     unittest.main()
