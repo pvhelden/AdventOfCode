@@ -143,6 +143,17 @@ class TestAdvent(unittest.TestCase):
         # Solution
         self.assertEqual(('hxbxxyzz', 'hxcaabcc'), day11.main('data/day11.txt'))
 
+    def test_day12(self):
+        # Part 1
+        self.assertEqual(6, day12.sum_all('[1,2,3]'))
+        self.assertEqual(6, day12.sum_all('{"a":2,"b":4}'))
+        self.assertEqual(3, day12.sum_all('[[[3]]]'))
+        self.assertEqual(3, day12.sum_all('{"a":{"b":4},"c":-1}'))
+        self.assertEqual(0, day12.sum_all('{"a":[-1,1]}'))
+        self.assertEqual(0, day12.sum_all('[-1,{"a":1}]'))
+        self.assertEqual(0, day12.sum_all('[]'))
+        self.assertEqual(0, day12.sum_all('{}'))
+
 
 if __name__ == '__main__':
     unittest.main()
