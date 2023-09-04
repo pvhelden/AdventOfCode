@@ -154,6 +154,15 @@ class TestAdvent(unittest.TestCase):
         self.assertEqual(0, day12.sum_all('[]'))
         self.assertEqual(0, day12.sum_all('{}'))
 
+        # Part 2
+        self.assertEqual(6, day12.sum_not_red('[1,2,3]'))
+        self.assertEqual(4, day12.sum_not_red('[1,{"c":"red","b":2},3]'))
+        self.assertEqual(0, day12.sum_not_red('{"d":"red","e":[1,2,3,4],"f":5}'))
+        self.assertEqual(6, day12.sum_not_red('[1,"red",5]'))
+
+        # Solution
+        self.assertEqual((111754, 65402), day12.main('data/day12.txt'))
+
 
 if __name__ == '__main__':
     unittest.main()
