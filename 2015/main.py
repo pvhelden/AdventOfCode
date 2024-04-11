@@ -9,11 +9,11 @@ def main():
     # days = [2]
 
     for day in days:
-        if not day == 1:
-            sleep(1)
         print()
         print(f"Day {day:02}:")
         print(modules[day - 1].main(f'data/day{day:02}.txt'))
+        if day != days[-1]:
+            sleep(1)
 
 
 if __name__ == '__main__':
