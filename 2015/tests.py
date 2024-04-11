@@ -189,6 +189,20 @@ class TestAdvent(unittest.TestCase):
         # Solution
         self.assertEqual((664, 640), day13.main('data/day13.txt'))
 
+    def test_day14(self):
+        # Part 1
+        self.assertEqual(1120, day14.find_total_distance(14, 10, 127, 1000))
+        self.assertEqual(1056, day14.find_total_distance(16, 11, 162, 1000))
+        self.assertEqual(1120, day14.find_best_distance([
+            'Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds.',
+            'Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds.',
+        ], 1000))
+
+        # Part 2
+
+        # Solution
+        self.assertEqual((2696, 0), day14.main('data/day14.txt'))
+
 
 if __name__ == '__main__':
     unittest.main()
