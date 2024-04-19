@@ -212,15 +212,19 @@ class TestAdvent(unittest.TestCase):
         self.assertEqual([-1, -2, 6, 3, 8], day15.get_props(
             'Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8',
         ))
-        self.assertEqual(62842880, day15.get_quantities([
+        self.assertEqual(62842880, day15.solve_function([
             'Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8',
             'Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3',
         ]))
 
         # Part 2
+        self.assertEqual(57600000, day15.solve_function([
+            'Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8',
+            'Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3',
+        ], 500))
 
         # Solution
-        self.assertEqual((222870, None), day15.main('data/day15.txt'))
+        self.assertEqual((222870, 117936), day15.main('data/day15.txt'))
 
 
 if __name__ == '__main__':
