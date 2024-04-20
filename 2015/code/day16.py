@@ -18,10 +18,16 @@ def parse_sues(lines: [str]) -> pl.DataFrame:
     return properties.with_row_index(offset=1)
 
 
-def find_sue(lines: [str], to_find: {str: int}) -> int:
+def find_sue(lines: [str], to_find: {str: int}, exact=True) -> int:
     df = pl.LazyFrame(parse_sues(lines))
+    operations = {key: pl.col(key).eq for key in to_find.keys()}
+    if not exact:
+        operations['cats'] = pl.col('cats').gt
+        operations['trees'] = pl.col('trees').gt
+        operations['pomeranians'] = pl.col('pomeranians').lt
+        operations['goldfish'] = pl.col('goldfish').lt
     for key, value in to_find.items():
-        df = df.filter(pl.col(key).eq(value) | pl.col(key).eq(np.nan))
+        df = df.filter(pl.col(key).eq(np.nan) | operations[key](value))
     return df.collect()['index'][0]
 
 
@@ -30,4 +36,4 @@ def main(filename: str) -> tuple:
         lines = file.read().splitlines()
         to_find = {'children': 3, 'cats': 7, 'samoyeds': 2, 'pomeranians': 3, 'akitas': 0, 'vizslas': 0, 'goldfish': 5,
                    'trees': 3, 'cars': 2, 'perfumes': 1}
-        return find_sue(lines, to_find), None
+        return find_sue(lines, to_find), find_sue(lines, to_find, exact=False)
