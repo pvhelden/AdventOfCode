@@ -226,6 +226,22 @@ class TestAdvent(unittest.TestCase):
         # Solution
         self.assertEqual((222870, 117936), day15.main('data/day15.txt'))
 
+    def test_day16(self):
+        # Part 1
+        self.assertEqual([(1, -1, 8, -1, 1, -1, -1, -1, -1, -1, 7), (2, 10, -1, -1, 5, -1, 10, -1, -1, -1, -1)],
+                         day16.parse_sues(
+                             ['Sue 1: children: 1, cars: 8, vizslas: 7', 'Sue 2: akitas: 10, perfumes: 10, children: 5']
+                         ).rows())
+        self.assertEqual(1, day16.find_sue(
+            ['Sue 1: children: 1, cars: 8, vizslas: 7', 'Sue 2: akitas: 10, perfumes: 10, children: 5'],
+            {'children': 1, 'cars': 8, 'vizslas': 7, 'cats': 0}
+        ))
+
+        # Part 2
+
+        # Solution
+        self.assertEqual((213, None), day16.main('data/day16.txt'))
+
 
 if __name__ == '__main__':
     unittest.main()
