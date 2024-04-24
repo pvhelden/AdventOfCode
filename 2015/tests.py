@@ -253,6 +253,17 @@ class TestAdvent(unittest.TestCase):
         # Solution
         self.assertEqual((213, 323), day16.main('data/day16.txt'))
 
+    def test_day17(self):
+        # Part 1
+        self.assertEqual([3, 2, 1], day17.parse_containers(['2', '1', '3']))
+        self.assertEqual(4, day17.fit_containers(['20', '15', '10', '5', '5'], 25))
+        self.assertEqual(4, day17.fit_containers(['20', '15', '10', '10', '5'], 35))
+
+        # Part 2
+
+        # Solution
+        self.assertEqual((4372, None), day17.main('data/day17.txt'))
+
 
 if __name__ == '__main__':
     unittest.main()
