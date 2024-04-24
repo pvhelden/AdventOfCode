@@ -10,14 +10,24 @@ def recursive_container(max_volume, used, remaining, combinations):
             recursive_container(max_volume, used + [remaining[i]], remaining[i + 1:], combinations)
 
 
-def fit_containers(lines: [str], max_volume: int):
+def get_combinations(lines: [str], max_volume: int):
     containers = parse_containers(lines)
     combinations = []
     recursive_container(max_volume, [], containers, combinations)
-    return len(combinations)
+    return combinations
+
+
+def get_number_combinations(lines: [str], max_volume: int):
+    return len(get_combinations(lines, max_volume))
+
+
+def get_number_shortest_combinations(lines: [str], max_volume: int):
+    combinations = get_combinations(lines, max_volume)
+    lengths = [len(combination) for combination in combinations]
+    return lengths.count(min(lengths))
 
 
 def main(filename: str) -> tuple:
     with open(filename) as file:
         lines = file.read().splitlines()
-        return fit_containers(lines, 150), None
+        return get_number_combinations(lines, 150), get_number_shortest_combinations(lines, 150)

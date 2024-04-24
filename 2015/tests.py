@@ -256,13 +256,14 @@ class TestAdvent(unittest.TestCase):
     def test_day17(self):
         # Part 1
         self.assertEqual([3, 2, 1], day17.parse_containers(['2', '1', '3']))
-        self.assertEqual(4, day17.fit_containers(['20', '15', '10', '5', '5'], 25))
-        self.assertEqual(4, day17.fit_containers(['20', '15', '10', '10', '5'], 35))
+        self.assertEqual(4, day17.get_number_combinations(['20', '15', '10', '5', '5'], 25))
+        self.assertEqual(4, day17.get_number_combinations(['20', '15', '10', '10', '5'], 35))
 
         # Part 2
+        self.assertEqual(3, day17.get_number_shortest_combinations(['20', '15', '10', '5', '5'], 25))
 
         # Solution
-        self.assertEqual((4372, None), day17.main('data/day17.txt'))
+        self.assertEqual((4372, 4), day17.main('data/day17.txt'))
 
 
 if __name__ == '__main__':
