@@ -4,7 +4,7 @@ def parse_containers(lines: [str]):
 
 def recursive_container(max_volume, used, remaining, combinations):
     if sum(used) == max_volume:
-        combinations.append(used.copy())
+        combinations.append(used)
     elif sum(used) < max_volume:
         for i in range(len(remaining)):
             recursive_container(max_volume, used + [remaining[i]], remaining[i + 1:], combinations)
