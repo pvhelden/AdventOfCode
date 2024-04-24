@@ -248,7 +248,7 @@ class TestAdvent(unittest.TestCase):
         self.assertEqual(2, day16.find_sue(
             ['Sue 1: akitas: 7, trees: 8, pomeranians: 4', 'Sue 2: goldfish: 1, perfumes: 4, cars: 6'],
             {'akitas': 7, 'trees': 9, 'pomeranians': 3, 'cats': 0}, False
-            ))
+        ))
 
         # Solution
         self.assertEqual((213, 323), day16.main('data/day16.txt'))
