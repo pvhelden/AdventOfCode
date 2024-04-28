@@ -19,9 +19,11 @@ def next_step(lights: [[int]], stuck: bool) -> None:
                 continue
             count = count_neighbours(lights, i, j)
             if count == 3:
-                changes.append((i, j, True))
+                if not lights[i][j]:
+                    changes.append((i, j, True))
             elif count != 2:
-                changes.append((i, j, False))
+                if lights[i][j]:
+                    changes.append((i, j, False))
     for change in changes:
         lights[change[0]][change[1]] = change[2]
 
