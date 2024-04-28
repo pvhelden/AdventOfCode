@@ -11,10 +11,12 @@ def count_neighbours(lights: [[int]], x: int, y: int) -> int:
     return count
 
 
-def next_step(lights: [[int]]) -> None:
+def next_step(lights: [[int]], stuck: bool) -> None:
     changes = []
     for i, row in enumerate(lights):
         for j, light in enumerate(row):
+            if stuck and i in [0, len(lights) - 1] and j in [0, len(lights[0]) - 1]:
+                continue
             count = count_neighbours(lights, i, j)
             if count == 3:
                 changes.append((i, j, True))
@@ -24,14 +26,19 @@ def next_step(lights: [[int]]) -> None:
         lights[change[0]][change[1]] = change[2]
 
 
-def animate_lights(lines: [str], steps: int) -> int:
+def animate_lights(lines: [str], steps: int, stuck: bool) -> int:
     lights = parse_lights(lines)
+    if stuck:
+        lights[0][0] = True
+        lights[0][-1] = True
+        lights[-1][0] = True
+        lights[-1][-1] = True
     for _ in range(steps):
-        next_step(lights)
+        next_step(lights, stuck)
     return sum(sum(row) for row in lights)
 
 
 def main(filename: str) -> tuple:
     with open(filename) as file:
         lines = file.read().splitlines()
-        return animate_lights(lines, 100), None
+        return animate_lights(lines, 100, False), animate_lights(lines, 100, True)

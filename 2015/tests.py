@@ -268,12 +268,17 @@ class TestAdvent(unittest.TestCase):
     def test_day18(self):
         # Part 1
         self.assertEqual([[True, False], [True, False]], day18.parse_lights([['#', '.'], ['#', '.']]))
-        self.assertEqual(4, day18.animate_lights(['.#.#.#', '...##.', '#....#', '..#...', '#.#..#', '####..'], 4))
+        self.assertEqual(4, day18.animate_lights([
+            '.#.#.#', '...##.', '#....#', '..#...', '#.#..#', '####..'
+        ], 4, False))
 
         # Part 2
+        self.assertEqual(17, day18.animate_lights([
+            '##.#.#', '...##.', '#....#', '..#...', '#.#..#', '####.#'
+        ], 5, True))
 
         # Solution
-        self.assertEqual((821, None), day18.main('data/day18.txt'))
+        self.assertEqual((821, 886), day18.main('data/day18.txt'))
 
 
 if __name__ == '__main__':
