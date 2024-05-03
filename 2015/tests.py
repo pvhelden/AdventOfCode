@@ -280,6 +280,18 @@ class TestAdvent(unittest.TestCase):
         # Solution
         self.assertEqual((821, 886), day18.main('data/day18.txt'))
 
+    def test_day19(self):
+        # Part 1
+        self.assertEqual([('H', 'HO'), ('H', 'OH'), ('O', 'HH')],
+                         day19.parse_replacements(['H => HO', 'H => OH', 'O => HH']))
+        self.assertEqual(4, day19.count_molecules(['H => HO', 'H => OH', 'O => HH'], 'HOH'))
+        self.assertEqual(7, day19.count_molecules(['H => HO', 'H => OH', 'O => HH'], 'HOHOHO'))
+
+        # Part 2
+
+        # Solution
+        self.assertEqual((518, None), day19.main('data/day19.txt'))
+
 
 if __name__ == '__main__':
     unittest.main()
