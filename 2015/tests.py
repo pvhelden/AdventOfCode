@@ -282,10 +282,10 @@ class TestAdvent(unittest.TestCase):
 
     def test_day19(self):
         # Part 1
-        self.assertEqual([('H', 'HO'), ('H', 'OH'), ('O', 'HH')],
-                         day19.parse_replacements(['H => HO', 'H => OH', 'O => HH']))
-        self.assertEqual(4, day19.count_molecules(['H => HO', 'H => OH', 'O => HH'], 'HOH'))
-        self.assertEqual(7, day19.count_molecules(['H => HO', 'H => OH', 'O => HH'], 'HOHOHO'))
+        test_lines = ['H => HO', 'H => OH', 'O => HH']
+        self.assertEqual([('H', 'HO'), ('H', 'OH'), ('O', 'HH')], day19.parse_replacements(test_lines))
+        self.assertEqual(4, day19.count_molecules(test_lines, 'HOH'))
+        self.assertEqual(7, day19.count_molecules(test_lines, 'HOHOHO'))
 
         # Part 2
 
