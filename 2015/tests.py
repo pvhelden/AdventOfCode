@@ -288,9 +288,14 @@ class TestAdvent(unittest.TestCase):
         self.assertEqual(7, day19.count_molecules(test_lines, 'HOHOHO'))
 
         # Part 2
+        self.assertEqual({'HH': 'O', 'HO': 'H', 'OH': 'H'}, day19.get_reverse_replacements_dict(test_lines))
+        test_lines += ['e => H', 'e => O']
+        self.assertEqual(3, day19.count_min_steps(test_lines, 'HOH'))
+        self.assertEqual(6, day19.count_min_steps(test_lines, 'HOHOHO'))
+        self.assertEqual(10, day19.count_min_steps(test_lines, 'HOHOHOHOHO'))
 
         # Solution
-        self.assertEqual((518, None), day19.main('data/day19.txt'))
+        self.assertEqual((518, 200), day19.main('data/day19.txt'))
 
 
 if __name__ == '__main__':
