@@ -306,9 +306,14 @@ class TestAdvent(unittest.TestCase):
         self.assertEqual(4, day20.find_lowest_house_number(70))
 
         # Part 2
+        self.assertEqual({1, 2, 5, 10, 25, 50}, day20.find_divisors(50, 50))
+        self.assertEqual({3, 17, 51}, day20.find_divisors(51, 50))
+        self.assertEqual({53, 106}, day20.find_divisors(106, 50))
+        self.assertEqual(1, day20.find_lowest_house_number(11, 11))
+        self.assertEqual(2, day20.find_lowest_house_number(12, 11))
 
         # Solution
-        self.assertEqual((831600, None), day20.main('data/day20.txt'))
+        self.assertEqual((831600, 884520), day20.main('data/day20.txt'))
 
 
 if __name__ == '__main__':
