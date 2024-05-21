@@ -1,7 +1,7 @@
 import re
 
 
-def get_numbers(reindeers: [str]) -> list:
+def get_numbers(reindeers: list[str]) -> list[list[int]]:
     """
     Extracts numbers from strings representing reindeer stats.
 
@@ -36,7 +36,7 @@ def find_total_distance(speed: int, endurance: int, rest: int, time: int) -> int
     return speed * (endurance * n_cycles + extra_time)
 
 
-def find_best_distance(stats: [int], time=2503) -> tuple:
+def find_best_distance(stats: list[list[int]], time=2503) -> tuple[int, int]:
     """
     Finds the distance traveled by the reindeer that has traveled the farthest.
 
@@ -57,7 +57,7 @@ def find_best_distance(stats: [int], time=2503) -> tuple:
     return best, index
 
 
-def find_best_score(stats: [int], time=2503) -> int:
+def find_best_score(stats: list[list[int]], time=2503) -> int:
     """
     Finds the maximum score obtained by any reindeer over the given time.
 
@@ -75,7 +75,7 @@ def find_best_score(stats: [int], time=2503) -> int:
     return max(scores)
 
 
-def race_distance(lines: [str], time=2503) -> int:
+def race_distance(lines: list[str], time=2503) -> int:
     """
     Simulates a race to find the distance traveled by the winning reindeer.
 
@@ -90,7 +90,7 @@ def race_distance(lines: [str], time=2503) -> int:
     return find_best_distance(stats, time)[0]
 
 
-def race_score(lines: [str], time=2503) -> int:
+def race_score(lines: list[str], time=2503) -> int:
     """
     Simulates a race to find the maximum score obtained by any reindeer.
 

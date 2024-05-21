@@ -267,7 +267,7 @@ class TestAdvent(unittest.TestCase):
 
     def test_day18(self):
         # Part 1
-        self.assertEqual([[True, False], [True, False]], day18.parse_lights([['#', '.'], ['#', '.']]))
+        self.assertEqual([[True, False], [True, False]], day18.parse_lights(['#.', '#.']))
         self.assertEqual(4, day18.animate_lights([
             '.#.#.#', '...##.', '#....#', '..#...', '#.#..#', '####..'
         ], 4, False))

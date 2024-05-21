@@ -1,8 +1,8 @@
-def parse_lights(lines: [str]) -> [[int]]:
+def parse_lights(lines: list[str]) -> list[list[bool]]:
     return [[True if char == '#' else False for char in list(line)] for line in lines]
 
 
-def count_neighbours(lights: [[int]], x: int, y: int) -> int:
+def count_neighbours(lights: list[list[int]], x: int, y: int) -> int:
     count = 0
     for i in range(max(0, x - 1), min(len(lights[0]), x + 2)):
         for j in range(max(0, y - 1), min(len(lights), y + 2)):
@@ -11,7 +11,7 @@ def count_neighbours(lights: [[int]], x: int, y: int) -> int:
     return count
 
 
-def next_step(lights: [[int]], stuck: bool) -> None:
+def next_step(lights: list[list[int]], stuck: bool) -> None:
     changes = []
     for i, row in enumerate(lights):
         for j, light in enumerate(row):
@@ -28,7 +28,7 @@ def next_step(lights: [[int]], stuck: bool) -> None:
         lights[change[0]][change[1]] = change[2]
 
 
-def animate_lights(lines: [str], steps: int, stuck: bool) -> int:
+def animate_lights(lines: list[str], steps: int, stuck: bool) -> int:
     lights = parse_lights(lines)
     if stuck:
         lights[0][0] = True
@@ -40,7 +40,7 @@ def animate_lights(lines: [str], steps: int, stuck: bool) -> int:
     return sum(sum(row) for row in lights)
 
 
-def main(filename: str) -> tuple:
+def main(filename: str) -> tuple[int, int]:
     with open(filename) as file:
         lines = file.read().splitlines()
         return animate_lights(lines, 100, False), animate_lights(lines, 100, True)

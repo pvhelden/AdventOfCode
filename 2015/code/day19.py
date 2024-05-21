@@ -1,11 +1,11 @@
 import re
 
 
-def parse_replacements(lines: [str]) -> [(str, str)]:
+def parse_replacements(lines: list[str]) -> list[tuple[str, ...]]:
     return [tuple(line.split(' => ')) for line in lines]
 
 
-def count_molecules(lines: [str], molecule: str) -> int:
+def count_molecules(lines: list[str], molecule: str) -> int:
     replacements = parse_replacements(lines)
     distinct_molecules = set()
     for atom, replacement in replacements:
@@ -15,11 +15,11 @@ def count_molecules(lines: [str], molecule: str) -> int:
     return len(distinct_molecules)
 
 
-def get_reverse_replacements_dict(lines: [str]) -> dict[str, str]:
+def get_reverse_replacements_dict(lines: list[str]) -> dict[str, str]:
     return {replacement: atom for line in lines for atom, replacement in [line.split(' => ')]}
 
 
-def count_min_steps(lines: [str], molecule: str) -> int:
+def count_min_steps(lines: list[str], molecule: str) -> int:
     reverse_replacements = get_reverse_replacements_dict(lines)
     steps = 0
     while molecule != 'e':
@@ -36,7 +36,7 @@ def count_min_steps(lines: [str], molecule: str) -> int:
     return steps
 
 
-def main(filename: str) -> tuple:
+def main(filename: str) -> tuple[int, int]:
     with open(filename) as file:
         lines = file.read().splitlines()
         molecule = ('CRnSiRnCaPTiMgYCaPTiRnFArSiThFArCaSiThSiThPBCaCaSiRnSiRnTiTiMgArPBCaPMgYPTiRnFArFArCaSiRnBPMgArPRn'

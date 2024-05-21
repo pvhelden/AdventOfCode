@@ -4,7 +4,7 @@ import numpy as np
 import polars as pl
 
 
-def parse_sues(lines: [str]) -> pl.DataFrame:
+def parse_sues(lines: list[str]) -> pl.DataFrame:
     column_names = ['akitas', 'cars', 'cats', 'children', 'goldfish', 'perfumes', 'pomeranians', 'samoyeds', 'trees',
                     'vizslas']
     schema = {name: pl.Float32 for name in column_names}
@@ -18,7 +18,7 @@ def parse_sues(lines: [str]) -> pl.DataFrame:
     return properties.with_row_index(offset=1)
 
 
-def find_sue(lines: [str], to_find: {str: int}, exact=True) -> int:
+def find_sue(lines: list[str], to_find: dict[str, int], exact=True) -> int:
     df = pl.LazyFrame(parse_sues(lines))
     operations = {key: pl.col(key).eq for key in to_find.keys()}
     if not exact:

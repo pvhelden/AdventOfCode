@@ -32,7 +32,7 @@ def objective_function(quantities, properties):
     return np.prod(scores[:-1]), scores[-1]
 
 
-def solve_function(ingredients: [str], calorie_count=0):
+def solve_function(ingredients: list[str], calorie_count=0):
     properties = [get_props(ingredient) for ingredient in ingredients]
     shitte = find_combinations(100, len(properties))
     best_score = 0

@@ -23,7 +23,7 @@ def find_lowest_house_number(target: int, factor: int = 10, houses: int = 0):
     return current
 
 
-def main(filename: str) -> tuple:
+def main(filename: str) -> tuple[int, int]:
     with open(filename) as file:
         target = int(file.read())
         return find_lowest_house_number(target), find_lowest_house_number(target, 11, 50)

@@ -2,7 +2,7 @@ from numpy import uint16
 from tqdm import tqdm
 
 
-def apply_instructions(instructions: list[str], signals: dict[(str, int)]):
+def apply_instructions(instructions: list[str], signals: dict[str, int]):
     with tqdm() as pbar:
         while len(instructions):
             line = instructions.pop(0)
@@ -44,9 +44,9 @@ def apply_instructions(instructions: list[str], signals: dict[(str, int)]):
 
 
 def compute_signal_a(instructions: list[str]):
-    signals1: dict[(str, int)] = dict()
+    signals1: dict[str, int] = dict()
     apply_instructions(instructions.copy(), signals1)
-    signals2: dict[(str, int)] = {'b': signals1['a']}
+    signals2: dict[str, int] = {'b': signals1['a']}
     apply_instructions(instructions, signals2)
     return signals1['a'], signals2['a']
 

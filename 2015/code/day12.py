@@ -11,12 +11,12 @@ def sum_not_red(string: str):
     with tqdm() as pbar:
         while stack:
             current = stack.pop(0)
-            if type(current) == dict:
+            if current.isinstance(dict):
                 if 'red' not in current.values():
                     stack.extend(current.values())
-            elif type(current) == list:
+            elif current.isinstance(list):
                 stack.extend(current)
-            elif type(current) == int:
+            elif current.isinstance(int):
                 total += current
             pbar.update()
     return total
