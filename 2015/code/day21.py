@@ -22,16 +22,12 @@ def fight(player: list[int], enemy: list[int]) -> bool:
 
 def add_to_player(player: list[int], inventory: tuple) -> int:
     cost = 0
-    for item in inventory:
-        if len(item) == 2:
-            for ring in item:
-                player[1] += ring[1]
-                player[2] += ring[2]
-                cost += ring[0]
-        else:
-            player[1] += item[1]
-            player[2] += item[2]
-            cost += item[0]
+    flat_inventory = list(inventory[:2])
+    flat_inventory.extend(inventory[2])
+    for item in flat_inventory:
+        player[1] += item[1]
+        player[2] += item[2]
+        cost += item[0]
     return cost
 
 
