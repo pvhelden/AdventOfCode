@@ -315,6 +315,21 @@ class TestAdvent(unittest.TestCase):
         # Solution
         self.assertEqual((831600, 884520), day20.main('data/day20.txt'))
 
+    def test_day21(self):
+        # Part 1
+        self.assertEqual([10, 9, 8], day21.parse_character('10 9 8'))
+        self.assertEqual(True, day21.fight([8, 5, 5], [12, 7, 2]))
+        self.assertEqual(False, day21.fight([8, 5, 5], [13, 7, 2]))
+        self.assertEqual(True, day21.fight([100, 5, 0], [100, 5, 0]))
+        self.assertEqual(8, day21.get_lowest_winning_cost([4, 0, 0]))
+        self.assertEqual(10, day21.get_lowest_winning_cost([100, 5, 0]))
+        self.assertEqual(23, day21.get_lowest_winning_cost([101, 5, 0]))
+
+        # Part 2
+
+        # Solution
+        self.assertEqual((121, None), day21.main('data/day21.txt'))
+
 
 if __name__ == '__main__':
     unittest.main()
