@@ -326,9 +326,11 @@ class TestAdvent(unittest.TestCase):
         self.assertEqual(23, day21.get_lowest_winning_cost([101, 5, 0]))
 
         # Part 2
+        self.assertEqual(356, day21.get_highest_losing_cost([100, 100, 0]))
+        self.assertEqual(8, day21.get_highest_losing_cost([100, 5, 0]))
 
         # Solution
-        self.assertEqual((121, None), day21.main('data/day21.txt'))
+        self.assertEqual((121, 201), day21.main('data/day21.txt'))
 
 
 if __name__ == '__main__':

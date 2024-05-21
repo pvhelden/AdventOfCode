@@ -48,6 +48,19 @@ def get_lowest_winning_cost(enemy: list[int]) -> int:
     return best
 
 
+def get_highest_losing_cost(enemy: list[int]) -> int:
+    worst = 0
+
+    for inventory in inventory_combinations:
+        player = list(player_base)
+        cost = add_to_player(player, inventory)
+
+        if not fight(player, enemy.copy()):
+            worst = max(worst, cost)
+
+    return worst
+
+
 def main(filename: str) -> tuple[int, int]:
     with open(filename) as file:
         lines = file.read()
